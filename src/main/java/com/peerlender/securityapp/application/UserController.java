@@ -26,7 +26,7 @@ public class UserController {
                 orElseThrow(() -> new UserNotFoundException(token)).getUserName();
     }
 
-    @PostMapping(value = "/")
+    @PostMapping(value = "/register")
     public void register(@RequestBody User user) {
         userRepository.save(user);
         notificationService.sendMessage(user);
