@@ -19,7 +19,7 @@ public class NotificationService {
 
     public void sendMessage(User user) {
         // So I pass to the other microservices only username and password, without id
-        User newUser = new User(user.getUserName(), user.getPassword());
+        User newUser = new User(user.getUsername(), user.getPassword());
         rabbitTemplate.convertAndSend("userRegisteredTopic","user.registered",GSON.toJson(newUser));
     }
 }
