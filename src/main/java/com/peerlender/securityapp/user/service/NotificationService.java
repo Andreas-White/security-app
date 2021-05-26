@@ -1,7 +1,6 @@
 package com.peerlender.securityapp.user.service;
 
 import com.google.gson.Gson;
-import com.peerlender.securityapp.user.model.NewUser;
 import com.peerlender.securityapp.user.model.User;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +18,6 @@ public class NotificationService {
     }
 
     public void sendMessage(User user) {
-        // So I pass to the other microservices only username and password, without id
-        NewUser newUser = new NewUser(user.getUsername(), user.getPassword());
-        rabbitTemplate.convertAndSend("userRegisteredTopic","user.registered",GSON.toJson(newUser));
+        rabbitTemplate.convertAndSend("userRegisteredTopic","user.registered",GSON.toJson(user));
     }
 }

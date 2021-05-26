@@ -24,13 +24,8 @@ public class UserController {
 
     @PostMapping(value = "/validate")
     public String validateTokenAndGetUsername(@RequestHeader("Authorization") String token) {
-        User user = userRepository.findUserByUsername(token);//.getUserName();
-        // Checking if the user exists
-        if (user != null)
-            return user.getUsername();
-        else
-            throw new UserNotFoundException(token);
-                //.orElseThrow(() -> new UserNotFoundException(token)).getUserName();
+        return userRepository.findById(token)
+                .orElseThrow(() -> new UserNotFoundException(token)).getUsername();
     }
 
     @PostMapping(value = "/register")
