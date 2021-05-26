@@ -1,6 +1,7 @@
 package com.peerlender.securityapp.user.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.Objects;
 
@@ -8,15 +9,26 @@ import java.util.Objects;
 public class User {
 
     @Id
+    @GeneratedValue
+    private int id;
     private String userName;
     private String password;
 
     public User() {}
 
+    // So I can create users with username and password only
     public User(String userName, String password) {
         this.userName = userName;
         this.password = password;
     }
+
+    public User(int id, String userName, String password) {
+        this.id = id;
+        this.userName = userName;
+        this.password = password;
+    }
+
+    public int getId() { return id; }
 
     public String getUserName() {
         return userName;
