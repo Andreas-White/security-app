@@ -1,5 +1,6 @@
 package com.peerlender.securityapp.application;
 
+import com.peerlender.securityapp.user.dto.UserDTO;
 import com.peerlender.securityapp.user.exception.UserNotFoundException;
 import com.peerlender.securityapp.user.model.User;
 import com.peerlender.securityapp.user.repository.UserRepository;
@@ -29,9 +30,10 @@ public class UserController {
     }
 
     @PostMapping(value = "/register")
-    public void register(@RequestBody User user) {
+    public void register(@RequestBody UserDTO userDTO) {
+        User user = new User(userDTO.getUsername(),userDTO.getPassword());
         userRepository.save(user);
-        notificationService.sendMessage(user);
+        notificationService.sendMessage(userDTO);
     }
 
     @GetMapping(value = "/allUsers")
